@@ -31,11 +31,11 @@ public:
 	{
 		HRESULT Res;
 
-		//Esta configuração se aplica a mudança de imagem para o monitor padrão configurado.
-		//Caso seja necessário usar em outro monitor, chame GetMonitorDevicePathAt.
+		//Esta configuraÃ§Ã£o se aplica a mudanÃ§a de imagem para o monitor padrÃ£o configurado.
+		//Caso seja necessÃ¡rio usar em outro monitor, chame GetMonitorDevicePathAt.
 		if (Proxima == true)
 		{
-			Res = PapelDeParede->AdvanceSlideshow(0, DSD_FORWARD);//Próxima
+			Res = PapelDeParede->AdvanceSlideshow(0, DSD_FORWARD);//PrÃ³xima
 		}
 		else
 		{
@@ -43,8 +43,8 @@ public:
 		}
 	}
 
-	//Para alterar as cores, são usados valores hexadecimais.
-	//Poderá também customizar de sua preferência, efetuando a alteração nestes valores ou criando-os.
+	//Para alterar as cores, sÃ£o usados valores hexadecimais.
+	//PoderÃ¡ tambÃ©m customizar de sua preferÃªncia, efetuando a alteraÃ§Ã£o nestes valores ou criando-os.
 	void AlterarCorDeFundo(COLORREF CorHexadecimal)
 	{
 		//Exemplos:
@@ -54,7 +54,7 @@ public:
 		COLORREF Preto = 0x00000000;
 
 		HRESULT Res;
-		//Para que ocorra sucesso na operação, não pode haver nenhum papel de parede ou o plano de fundo estar habilitado.
+		//Para que ocorra sucesso na operaÃ§Ã£o, nÃ£o pode haver nenhum papel de parede ou o plano de fundo estar habilitado.
 		Res = PapelDeParede->SetBackgroundColor(CorHexadecimal);
 	}
 
@@ -73,10 +73,10 @@ public:
 	* 
 	* - DWPOS_CENTER - Centralizar.
 	* - DWPOS_TILE - Lado a lado.
-	* - DWPOS_STRETCH - Preenchimento máximo, pode ocorrer perda na qualidade.
+	* - DWPOS_STRETCH - Preenchimento mÃ¡ximo, pode ocorrer perda na qualidade.
 	* - DWPOS_FIT - Esticar.
 	* - DWPOS_FILL - Preenchimento inteligente.
-	* - DWPOS_SPAN - Definir uma única imagem em todos os monitores.
+	* - DWPOS_SPAN - Definir uma Ãºnica imagem em todos os monitores.
 	* 
 	*/
 	void AlterarRedimensionamentoDePapelDeParede()
@@ -96,23 +96,27 @@ public:
 		HRESULT Res;
 
 		int Tipo;
-		UINT Tempo;//Tempo de mudança para a próxima imagem.
+		UINT Tempo;//Tempo de mudanÃ§a para a prÃ³xima imagem.
 		Res = PapelDeParede->GetSlideshowOptions((DESKTOP_SLIDESHOW_OPTIONS*)&Tipo,
 			&Tempo);
 
 		if (Tipo == 0)
-			cout << "A alteração para imagens aleatórias está desativado." << '\n';
+		{
+			cout << "A alteraÃ§Ã£o para imagens aleatÃ³rias estÃ¡ desativado." << '\n';
+		}
 		else
-			cout << "A alteração para imagens aleatórias está ativo." << '\n';
+		{
+			cout << "A alteraÃ§Ã£o para imagens aleatÃ³rias estÃ¡ ativo." << '\n';
+		}
 
-		cout << "Tempo para a próxima mudança de imagem: " << Tempo << " millissegundos.\n";
+		cout << "Tempo para a prÃ³xima mudanÃ§a de imagem: " << Tempo << " millissegundos.\n";
 	}
 
 }Funcoes;
 
 int main()
 {
-	cout << "O assistente está efetuando configurações no tema padrão do Windows...";
+	cout << "O assistente estÃ¡ efetuando configuraÃ§Ãµes no tema padrÃ£o do Windows...";
 
 	Funcoes.InicializarInstancia();
 	Funcoes.ProximoPapelDeParede(true);
@@ -121,8 +125,8 @@ int main()
 	Funcoes.ObterCorDeFundo();
 	Funcoes.HabilitarPlanoDeFundo(TRUE);
 
-	//DSO_SHUFFLEIMAGES para ativar a exibição de imagens aleatórias.
-	//60000 mil milissegundos equivalem a 1 minuto para a próxima exibição.
+	//DSO_SHUFFLEIMAGES para ativar a exibiÃ§Ã£o de imagens aleatÃ³rias.
+	//60000 mil milissegundos equivalem a 1 minuto para a prÃ³xima exibiÃ§Ã£o.
 	Funcoes.AlterarConfiguracoesDeApresentacaoDeSlides(DSO_SHUFFLEIMAGES, 60000);
 	Funcoes.ObterConfiguracoesDeApresentacaoDeSlides();
 
